@@ -2,8 +2,9 @@ import cors from "cors"
 import express from "express"
 import mongoose from "mongoose"
 import middleware from "./utils/middleware"
-import cragsRouter from "./routes/cragsRoutes"
-import pingRouter from "./routes/pingRoutes"
+import cragsRouter from "./routers/cragsRoutes"
+import pingRouter from "./routers/pingRoutes"
+import loginRouter from "./routers/loginRoutes"
 require("dotenv").config()
 
 const app = express()
@@ -26,6 +27,7 @@ app.use(express.json())
 app.use(middleware.requestLogger)
 app.use("/ping", pingRouter)
 app.use("/crags", cragsRouter)
+app.use("/crags/login", loginRouter)
 
 app.use(middleware.unknownEndpoint)
 

@@ -1,0 +1,7 @@
+POST http://localhost:3001/crags/login
+content-type: application/json
+
+{
+    "username": "Tester",
+    "password": "Tester"
+}

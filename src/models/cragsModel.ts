@@ -1,6 +1,6 @@
-const mongoose = require("mongoose")
+import { Schema, model } from "mongoose"
 
-const routeSchema = new mongoose.Schema({
+const routeSchema = new Schema({
   name: { type: String },
   grade: { type: String },
 })
@@ -9,11 +9,11 @@ routeSchema.set("toJSON", {
     delete returnedObject.__v
   },
 })
-const Route = mongoose.model("Route", routeSchema)
+const Route = model("Route", routeSchema)
 
-const sectorSchema = new mongoose.Schema({
+const sectorSchema = new Schema({
   sectorName: { type: String },
-  vie: [{ type: mongoose.Schema.Types.ObjectId, ref: "Route" }],
+  vie: [{ type: Schema.Types.ObjectId, ref: "Route" }],
 })
 
 routeSchema.set("toJSON", {
@@ -22,12 +22,12 @@ routeSchema.set("toJSON", {
   },
 })
 
-const Sector = mongoose.model("Sector", sectorSchema)
+const Sector = model("Sector", sectorSchema)
 
-const cragSchema = mongoose.Schema({
+const cragSchema = new Schema({
   name: String,
   region: String,
-  sectors: [{ type: mongoose.Schema.Types.ObjectId, ref: "Sector" }],
+  sectors: [{ type: Schema.Types.ObjectId, ref: "Sector" }],
   distance: Number,
   location: {
     type: {
@@ -61,6 +61,6 @@ cragSchema.set("toJSON", {
   },
 })
 
-const Crag = mongoose.model("Crag", cragSchema)
+const Crag = model("Crag", cragSchema)
 
 module.exports = { Crag, Route, Sector, sectorSchema, routeSchema }

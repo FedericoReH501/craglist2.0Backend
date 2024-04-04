@@ -17,7 +17,9 @@ module.exports = {
   plugins: ["@typescript-eslint", "prettier"],
   rules: {
     "@typescript-eslint/semi": ["error"],
-    "@typescript-eslint/explicit-function-return-type": "off",
+    "@typescript-eslint/explicit-function-return-type": "on",
+    "@typescript-eslint/no-explicit-any": "on",
+
     "@typescript-eslint/explicit-module-boundary-types": "off",
     "@typescript-eslint/restrict-template-expressions": "off",
     "@typescript-eslint/restrict-plus-operands": "off",
