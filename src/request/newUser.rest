@@ -1,0 +1,11 @@
+POST http://localhost:3001/user/createuser
+content-type: application/json
+
+{
+    "username": "Tester1.0",
+    "name":"Federico",
+    "email": "federico.re@gmail.com",
+    "level":0,
+    "password": "Password",
+    "region":"ruvuma"
+}
