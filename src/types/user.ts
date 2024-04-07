@@ -27,6 +27,11 @@ export interface UserType {
   workInProg: Types.ObjectId[]
 }
 
+export interface Credentials {
+  username: string
+  password: string
+}
+
 export type UserModel = Model<UserType>
 
 export type NewUserType = Omit<

@@ -12,6 +12,12 @@ routeSchema.set("toJSON", {
 const Route = model("Route", routeSchema)
 
 const sectorSchema = new Schema({
+  warning: [
+    {
+      route: { type: Schema.Types.ObjectId, ref: "Route" },
+      message: { type: String },
+    },
+  ],
   sectorName: { type: String },
   vie: [{ type: Schema.Types.ObjectId, ref: "Route" }],
 })

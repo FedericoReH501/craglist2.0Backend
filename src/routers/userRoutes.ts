@@ -1,4 +1,4 @@
-import express from "express"
+import express, { Request, Response } from "express"
 import { NewUserType, UserType } from "../types/user"
 const bcrypt = require("bcrypt")
 
@@ -6,7 +6,11 @@ const { User } = require("../models/userModel")
 
 const userRouter = express.Router()
 
-userRouter.post("/newUser", async (req, res) => {
+import { loginController } from "../controllers/loginController"
+
+userRouter.post("/login", loginController)
+
+userRouter.post("/newUser", async (req: Request, res: Response) => {
   const body: NewUserType = req.body
   try {
     if (
