@@ -73,3 +73,27 @@ export const removeCompletedRoute = async (req: Request, res: Response) => {
     res.status(400)
   }
 }
+
+export const insertWIPRoute = async (req: Request, res: Response) => {
+  try {
+    const token = (req as AuthRequest).token as DecodedToken
+    const updatedUser = await userServices.addWIPRoute(token.id, req.body)
+    res.status(200).send(updatedUser)
+    /** must validate due to type assertion */
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}
+
+export const removeWIPRoute = async (req: Request, res: Response) => {
+  try {
+    console.log("removing route......")
+    const token = (req as AuthRequest).token as DecodedToken
+    const updatedUser = await userServices.removeWIPRoute(token.id, req.body)
+
+    res.status(200).send(updatedUser)
+    /** must validate due to type assertion */
+  } catch (error) {
+    res.status(400).send(error)
+  }
+}

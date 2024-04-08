@@ -10,7 +10,7 @@ export interface CompletedRoutesType {
 
 export type WorkInProgType = Pick<
   CompletedRoutesType,
-  "sector" | "completionDate" | "completionType"
+  "sector" | "completionDate" | "crag" | "route"
 >
 
 export interface UserType {

@@ -1,5 +1,5 @@
 import { Types, HydratedDocument } from "mongoose"
-import { CompletedRoutesType, Credentials } from "../types/user"
+import { CompletedRoutesType, Credentials, WorkInProgType } from "../types/user"
 import jwt, { Secret } from "jsonwebtoken"
 const { User } = require("../models/userModel")
 const bcrypt = require("bcrypt")
@@ -75,4 +75,49 @@ const removeCompletedRoute = async (
   }
 }
 
-export default { login, addCompletedRoute, removeCompletedRoute }
+const addWIPRoute = async (
+  filter: Types.ObjectId,
+  newRoute: HydratedDocument<WorkInProgType>
+) => {
+  try {
+    console.log("completed route service........filter: ", filter)
+    const userUpdate = await User.findOneAndUpdate(
+      { _id: filter },
+      { $push: { completedRoutes: newRoute } },
+      {
+        new: true,
+      }
+    )
+    console.log("user is updated", userUpdate)
+    return userUpdate
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+const removeWIPRoute = async (
+  filter: Types.ObjectId,
+  toRemoveRoute: HydratedDocument<WorkInProgType>
+) => {
+  try {
+    console.log("removing...")
+    const userUpdate = await User.findOneAndUpdate(
+      { _id: filter },
+      { $pull: { completedRoutes: { route: toRemoveRoute.route } } },
+      {
+        new: true,
+      }
+    )
+    return userUpdate
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export default {
+  login,
+  addCompletedRoute,
+  removeCompletedRoute,
+  addWIPRoute,
+  removeWIPRoute,
+}
