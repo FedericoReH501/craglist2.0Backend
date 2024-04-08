@@ -1,4 +1,4 @@
-import { Credentials } from "../types/user"
+import { CompletedRoutesType, Credentials } from "../types/user"
 import jwt, { Secret } from "jsonwebtoken"
 const { User } = require("../models/userModel")
 const bcrypt = require("bcrypt")
@@ -35,4 +35,24 @@ const login = async (credential: Credentials) => {
   }
 }
 
-export default { login }
+const addCompletedRoute = async (
+  filter: unknown,
+  newRoute: CompletedRoutesType
+) => {
+  try {
+    console.log("completed route service........filter: ", filter)
+    const userUpdate = await User.findOneAndUpdate(
+      { _id: filter },
+      { $push: { completedRoutes: newRoute } },
+      {
+        new: true,
+      }
+    )
+    console.log("user is updated", userUpdate)
+    return userUpdate
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export default { login, addCompletedRoute }

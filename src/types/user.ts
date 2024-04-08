@@ -1,9 +1,9 @@
 import { Model, Types } from "mongoose"
 
 export interface CompletedRoutesType {
-  crag: string
-  sector: string
-  route: string
+  crag: Types.ObjectId
+  sector: Types.ObjectId
+  route: Types.ObjectId
   completionType: "onSight" | "flash" | "normal"
   completionDate: string
 }
