@@ -1,3 +1,4 @@
+import { Types, HydratedDocument } from "mongoose"
 import { CompletedRoutesType, Credentials } from "../types/user"
 import jwt, { Secret } from "jsonwebtoken"
 const { User } = require("../models/userModel")
@@ -36,7 +37,7 @@ const login = async (credential: Credentials) => {
 }
 
 const addCompletedRoute = async (
-  filter: unknown,
+  filter: Types.ObjectId,
   newRoute: CompletedRoutesType
 ) => {
   try {
@@ -55,4 +56,23 @@ const addCompletedRoute = async (
   }
 }
 
-export default { login, addCompletedRoute }
+const removeCompletedRoute = async (
+  filter: Types.ObjectId,
+  toRemoveRoute: HydratedDocument<CompletedRoutesType>
+) => {
+  try {
+    console.log("removing...")
+    const userUpdate = await User.findOneAndUpdate(
+      { _id: filter },
+      { $pull: { completedRoutes: { route: toRemoveRoute.route } } },
+      {
+        new: true,
+      }
+    )
+    return userUpdate
+  } catch (error) {
+    throw new Error(error)
+  }
+}
+
+export default { login, addCompletedRoute, removeCompletedRoute }

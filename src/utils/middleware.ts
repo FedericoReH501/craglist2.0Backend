@@ -32,7 +32,6 @@ const authenticate = async (
   next: NextFunction
 ) => {
   try {
-    console.log("in authentication middleware.....")
     const authorization = request.header("Authorization")
     if (
       !authorization ||
@@ -47,6 +46,7 @@ const authenticate = async (
       process.env.SECRET as Secret
     ) as DecodedToken
     ;(request as AuthRequest).token = decodedToken as DecodedToken
+    console.log("Authenticated")
   } catch (error) {
     response.status(401).send("Please authenticate")
   }

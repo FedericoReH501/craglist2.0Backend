@@ -57,3 +57,19 @@ export const insertCompletedRoute = async (req: Request, res: Response) => {
     res.status(400)
   }
 }
+
+export const removeCompletedRoute = async (req: Request, res: Response) => {
+  try {
+    console.log("removing route......")
+    const token = (req as AuthRequest).token as DecodedToken
+    const updatedUser = await userServices.removeCompletedRoute(
+      token.id,
+      req.body
+    )
+    console.log("completed!! , removed:", updatedUser)
+    res.status(200).send(updatedUser)
+    /** must validate due to type assertion */
+  } catch (error) {
+    res.status(400)
+  }
+}

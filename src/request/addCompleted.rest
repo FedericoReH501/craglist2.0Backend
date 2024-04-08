@@ -1,4 +1,4 @@
-PUT http://localhost:3001/user/update/completedRoutes
+PUT http://localhost:3001/user/update/completedRoutes/add
 content-type: application/json
 Authorization:Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VybmFtZSI6IlRlc3RlciIsImlkIjoiNjUwMDIyYjM2ZTdjMGY2MDkwYzM2N2Q1IiwiaWF0IjoxNzEyNTI5NjQzfQ.8-XSV8vYp-CwcKP8CkpIYjgCgIALWnMaYyQYbHn59Mk
 
