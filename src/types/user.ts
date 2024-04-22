@@ -34,11 +34,4 @@ export interface Credentials {
 
 export type UserModel = Model<UserType>
 
-export type NewUserType = Omit<
-  UserType,
-  | "passwordHash"
-  | "workInProg"
-  | "completedRoutes"
-  | "favoritesCrags"
-  | "favoritesRegions"
-> & { password: string }
+export type NewUserType = Omit<UserType, "passwordHash"> & { password: string }
